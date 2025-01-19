@@ -1,0 +1,22 @@
+# Visual Studio specific
+.vs/
+*.suo
+*.db
+*.db-wal
+*.db-shm
+
+# Build and intermediate files
+bin/
+obj/
+*.cache
+
+# User-specific settings
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Generated files
+project.assets.json
