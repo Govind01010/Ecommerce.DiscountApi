@@ -30,9 +30,9 @@ namespace Discount.Controller
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> CreateDiscount([FromBody] Domain.Entities.Discount coupon)
+        public async Task<IActionResult> CreateDiscount([FromBody] Domain.Dtos.DiscountDto discountDto)
         {
-            var request = new CreateDiscountCouponCommand(coupon.Code, coupon.Description, coupon.Percentage, coupon.MinimumAmount);
+            var request = new CreateDiscountCouponCommand(discountDto);
             var response = await _mediator.Send(request);
             return Ok(response);
         }
