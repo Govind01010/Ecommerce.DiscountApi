@@ -4,15 +4,11 @@ using Discount.Domain.Dtos;
 
 namespace Discount.Application.Mapping
 {
-    public class MappingConfig
+    public class MappingConfig:Profile
     {
-        public static MapperConfiguration RegisterMaps()
+        public MappingConfig()
         {
-            var mappingConfig = new MapperConfiguration(config =>
-            {
-                config.CreateMap<Domain.Entities.Discount, DiscountDto>().ReverseMap();
-            });
-            return mappingConfig;
+          CreateMap<Domain.Entities.Discount, DiscountDto>().ReverseMap();
         }
     }
 }

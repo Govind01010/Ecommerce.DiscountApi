@@ -2,6 +2,7 @@
 using Discount.Application.Command.DeleteDiscountCoupon;
 using Discount.Application.Command.UpdateDiscountCoupon;
 using Discount.Application.Query.GetDiscountCouponById;
+using Discount.Application.Query.GetDiscountCoupons;
 using Discount.Domain.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,12 +19,22 @@ namespace Discount.Controller
             _mediator = mediator;
         }
 
-        [HttpGet("GetDiscountCouponById/{discountCoupon}")]
+        [HttpGet("GetDiscountCouponById/{discountCouponId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetDiscountCouponById([FromRoute] int discountCoupon)
+        public async Task<IActionResult> GetDiscountCouponById([FromRoute] int discountCouponId)
         {
-            var query = new GetDiscountCouponByIdQuery(discountCoupon);
+            var query = new GetDiscountCouponByIdQuery(discountCouponId);
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpGet("GetAllDiscountCoupons")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetAllDiscountCoupons()
+        {
+            var query = new GetDiscountCouponsQuery();
             var response = await _mediator.Send(query);
             return Ok(response);
         }

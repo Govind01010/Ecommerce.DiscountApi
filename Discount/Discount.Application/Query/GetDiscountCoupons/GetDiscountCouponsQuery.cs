@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Discount.Application.Messaging;
 
-namespace Discount.Application.Query.GetDiscountCoupons
-{
-    internal class GetDiscountCouponsQuery
-    {
-    }
-}
+namespace Discount.Application.Query.GetDiscountCoupons;
+
+public sealed record GetDiscountCouponsQuery() : IQuery<IEnumerable<Domain.Dtos.DiscountDto>>;

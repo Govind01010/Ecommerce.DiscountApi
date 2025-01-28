@@ -1,4 +1,10 @@
 using Discount.Infrastructure.Data;
+using Microsoft.AspNetCore.Hosting;
+using MediatR;
+using Discount.Application.Command.CreateCoupon;
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Discount.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen();
 
 // Add services to the container.
-builder.Services.AddInfrastructureData(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services
+    .AddApplication()
+    .AddInfrastructureData(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 // Add controllers to the services
 builder.Services.AddControllers();
@@ -18,11 +26,7 @@ app.MapControllers();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        c.RoutePrefix = "swagger"; // Set Swagger UI at /swagger/index.html
-    });
+    app.UseSwaggerUI();
 }
 
 app.Run();
