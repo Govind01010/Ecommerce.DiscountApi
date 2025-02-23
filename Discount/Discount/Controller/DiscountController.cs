@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Discount.Controller
 {
-    [Route("api/Discount")]
+    [Route("api/discount-coupon")]
     [ApiController]
     public class DiscountController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Discount.Controller
             _mediator = mediator;
         }
 
-        [HttpGet("GetDiscountCouponById/{discountCouponId}")]
+        [HttpGet("get-coupon-by-id/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetDiscountCouponById([FromRoute] int discountCouponId)
@@ -29,7 +29,7 @@ namespace Discount.Controller
             return Ok(response);
         }
 
-        [HttpGet("GetAllDiscountCoupons")]
+        [HttpGet("get-all-coupons")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllDiscountCoupons()
@@ -39,7 +39,7 @@ namespace Discount.Controller
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost("create-coupon")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> CreateDiscount([FromBody] Domain.Dtos.DiscountDto discountDto)
         {
@@ -48,7 +48,7 @@ namespace Discount.Controller
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut("update-coupon")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateDiscount([FromBody] DiscountDto coupon)
         {
@@ -57,7 +57,7 @@ namespace Discount.Controller
             return Ok(response);
         }
 
-        [HttpDelete("DeleteDiscount/{id}")]
+        [HttpDelete("delete-coupon/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteDiscount([FromRoute]int id)
         {
